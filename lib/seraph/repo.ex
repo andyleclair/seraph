@@ -57,7 +57,7 @@ defmodule Seraph.Repo do
           {:ok,
           [
             %{
-              "p" => %Bolt.Sips.Types.Node{
+              "p" => %Boltx.Types.Node{
                 id: 1813,
                 labels: ["Person"],
                 properties: %{"name" => "Collin Chou", "role" => "Seraph"}
@@ -119,11 +119,9 @@ defmodule Seraph.Repo do
         query = Seraph.Query.prepare(query, opts)
 
         statement =
-          query.operations
-          |> Enum.map(fn {_op, operation_data} ->
+          Enum.map_join(query.operations, "\n", fn {_op, operation_data} ->
             Seraph.Query.Cypher.encode(operation_data)
           end)
-          |> Enum.join("\n")
 
         case Seraph.Query.Planner.query(__MODULE__, statement, Enum.into(query.params, %{}), opts) do
           {:ok, raw_results} ->
@@ -139,8 +137,8 @@ defmodule Seraph.Repo do
 
             {:ok, result}
 
-          {:error, %Bolt.Sips.Error{} = error} ->
-            message = "#{error.code}: #{error.message}"
+          {:error, %Boltx.Error{bolt: %{code: code, message: message}} = error} ->
+            message = "#{code}: #{message}"
             error = Seraph.QueryError.exception(message: message, query: query.literal)
             {:error, error}
         end

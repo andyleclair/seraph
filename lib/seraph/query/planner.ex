@@ -33,20 +33,18 @@ defmodule Seraph.Query.Planner do
   Launch query agains Neo4j database and return the unformatted result.
   """
   @spec raw_query(Seraph.Repo.t(), String.t(), map, Keyword.t()) ::
-          {:ok, Bolt.Sips.Response.t() | [Bolt.Sips.Response.t()]} | {:error, Bolt.Sips.Error.t()}
+          {:ok, Boltx.Response.t() | [Boltx.Response.t()]} | {:error, Boltx.Error.t()}
   def raw_query(repo, statement, params \\ %{}, opts \\ []) do
-    opts = Keyword.put_new(opts, :prefix, repo)
-    Bolt.Sips.query(get_conn(repo, opts), statement, params, opts)
+    Boltx.query(repo, statement, params, opts)
   end
 
   @doc """
   Same as raw_query/4 but raises in case of error.
   """
   @spec raw_query!(Seraph.Repo.t(), String.t(), map, Keyword.t()) ::
-          Bolt.Sips.Response.t() | [Bolt.Sips.Response.t()] | Bolt.Sips.Exception.t()
+          Boltx.Response.t() | [Boltx.Response.t()] | Boltx.Exception.t()
   def raw_query!(repo, statement, params \\ %{}, opts \\ []) do
-    opts = Keyword.put_new(opts, :prefix, repo)
-    Bolt.Sips.query!(get_conn(repo, opts), statement, params, opts)
+    Boltx.query!(repo, statement, params, opts)
   end
 
   defp format_results(results, true) do
@@ -58,17 +56,5 @@ defmodule Seraph.Query.Planner do
 
   defp format_results(results, _opts) do
     results.results
-  end
-
-  defp get_conn(_, conn: conn) do
-    conn
-  end
-
-  defp get_conn(repo, role: role) do
-    Bolt.Sips.conn(role, prefix: repo)
-  end
-
-  defp get_conn(repo, _) do
-    Bolt.Sips.conn(:direct, prefix: repo)
   end
 end

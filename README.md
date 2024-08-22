@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/dominique-vassard/seraph.svg?branch=master)](https://travis-ci.org/dominique-vassard/seraph)
 
-Docs: https://hexdocs.pm/seraph
+Docs: <https://hexdocs.pm/seraph>
 
 Seraph is a tool to use Neo4j in Elixir project in a graph way.  
 It is heavily inspired by Ecto and OGM projects (in Java and python in particular).  
@@ -16,19 +16,20 @@ The package can be installed by adding `seraph` to your list of dependencies in 
 ```elixir
 def deps do
   [
-    {:seraph, "~> 0.2.0"}
+    {:seraph, "~> 0.3.0"}
   ]
 end
 ```
 
-# Configuration
-```
+## Configuration
+
+```elixir
 # In your config/config.exs file
 config :my_app, ecto_repos: [Sample.Repo]
 
 config :my_app, Sample.Repo,
   hostname: "localhost",
-  basic_auth: [username: "neo4j", password: "test"],
+  auth: [username: "neo4j", password: "test"],
   port: 7687,
   pool_size: 5,
   max_overflow: 1
@@ -55,7 +56,7 @@ defmodule MyApp.Application do
 end
 ```
 
-### Contributing
+## Contributing
 
 - [Fork it](https://github.com/dominique-vassard/seraph/fork)
 - Create your feature branch (`git checkout -b my-new-feature`)
@@ -63,4 +64,3 @@ end
 - Commit your changes (`git commit -am 'Add some feature'`)
 - Push to the branch (`git push origin my-new-feature`)
 - Create new Pull Request
-

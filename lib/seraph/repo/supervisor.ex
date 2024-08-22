@@ -9,10 +9,10 @@ defmodule Seraph.Repo.Supervisor do
   def init({repo, otp_app, _opts}) do
     config =
       Application.get_env(otp_app, repo)
-      |> Keyword.put_new(:prefix, repo)
+      |> Keyword.put_new(:name, repo)
 
     children = [
-      {Bolt.Sips, config}
+      {Boltx, config}
     ]
 
     opts = [strategy: :one_for_one, max_restarts: 0]

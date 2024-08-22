@@ -1,7 +1,7 @@
 defmodule Seraph.MixProject do
   use Mix.Project
 
-  @version "0.2.4"
+  @version "0.3.0"
 
   def project do
     [
@@ -102,14 +102,14 @@ defmodule Seraph.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:bolt_sips, "~> 2.0"},
-      {:ecto, "~>3.5"},
+      {:boltx, "~> 0.0.6"},
+      {:ecto, "~> 3.10"},
       {:uuid, "~> 1.1"},
       {:inflex, "~> 2.0.0"},
       # dev and test only deps
-      {:credo, "~> 1.1.0", only: [:dev, :test], runtime: false},
+      {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
       {:ex_doc, "~> 0.19", only: :dev, runtime: false},
-      {:dialyxir, "~> 1.0.0-rc.4", only: [:dev], runtime: false},
+      {:dialyxir, "~> 1.0", only: [:dev], runtime: false},
       {:excoveralls, "~> 0.10", only: :test}
     ]
   end

@@ -26,15 +26,15 @@ defmodule Seraph.Repo.Helper do
   end
 
   @doc """
-  Build a node schema from a Bolt.Sips.Node
+  Build a node schema from a Boltx.Node
   """
   @spec build_node(Seraph.Repo.queryable(), nil | map) ::
           nil | Seraph.Schema.Node.t() | Seraph.Node.t()
-  def build_node(Seraph.Node, %Bolt.Sips.Types.Node{} = node_data) do
+  def build_node(Seraph.Node, %Boltx.Types.Node{} = node_data) do
     Seraph.Node.map(node_data)
   end
 
-  def build_node(queryable, %Bolt.Sips.Types.Node{} = node_data) do
+  def build_node(queryable, %Boltx.Types.Node{} = node_data) do
     props =
       node_data.properties
       |> atom_map()

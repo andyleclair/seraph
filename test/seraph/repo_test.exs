@@ -23,19 +23,19 @@ defmodule Seraph.RepoTest do
     end
 
     test "db error" do
-      assert {:error, %Bolt.Sips.Error{}} = TestRepo.query("INVALID CQL")
+      assert {:error, %Boltx.Error{}} = TestRepo.query("INVALID CQL")
     end
 
     test "with stats" do
       assert {:ok,
               %{
-                results: [%{"t" => %Bolt.Sips.Types.Node{}}],
+                results: [%{"t" => %Boltx.Types.Node{}}],
                 stats: %{"labels-added" => 1, "nodes-created" => 1}
               }} = TestRepo.query("CREATE (t:Test) RETURN t", %{}, with_stats: true)
     end
 
     test "raise when used with!" do
-      assert_raise Bolt.Sips.Exception, fn ->
+      assert_raise Boltx.Error, fn ->
         TestRepo.query!("INVALID CQL")
       end
     end

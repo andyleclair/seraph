@@ -11,8 +11,8 @@ defmodule Seraph.Node do
         }
 
   @doc false
-  @spec map(Bolt.Sips.Types.Node.t()) :: Seraph.Node.t()
-  def map(%Bolt.Sips.Types.Node{id: id, labels: labels, properties: properties}) do
+  @spec map(Boltx.Types.Node.t()) :: Seraph.Node.t()
+  def map(%Boltx.Types.Node{id: id, labels: labels, properties: properties}) do
     %Seraph.Node{
       __id__: id,
       labels: labels,

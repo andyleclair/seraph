@@ -8,8 +8,8 @@ defmodule Seraph.Repo.Node.Preloader do
   @default_limit :infinity
 
   @type result :: %{
-          :preload => Bolt.Sips.Types.Node.t(),
-          optional(:rel) => Bolt.Sips.Types.Relationship.t()
+          :preload => Boltx.Types.Node.t(),
+          optional(:rel) => Boltx.Types.Relationship.t()
         }
 
   @type options :: Keyword.t()

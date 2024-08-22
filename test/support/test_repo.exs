@@ -1,7 +1,6 @@
 config = [
-  hostname: "localhost",
-  basic_auth: [username: "neo4j", password: "test"],
-  port: 7687,
+  uri: "bolt://localhost:7687",
+  auth: [username: "neo4j", password: "password"],
   pool_size: 5,
   max_overflow: 1
 ]

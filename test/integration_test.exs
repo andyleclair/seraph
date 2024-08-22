@@ -325,7 +325,7 @@ defmodule Seraph.IntegrationTest do
 
       assert [
                %{
-                 "u" => %Bolt.Sips.Types.Node{
+                 "u" => %Boltx.Types.Node{
                    labels: ["User"],
                    properties: %{"firstName" => "Updated", "lastName" => "Doe", "viewCount" => 0}
                  }

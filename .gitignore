@@ -25,3 +25,5 @@ neo4jex-*.tar
 # Vs code artifacts
 .elixir_ls
 .vscode
+
+/neo4j_db/
