@@ -16,7 +16,7 @@ defmodule Seraph.Query do
       |> return([n])
 
   ## Node and relationship representation
-  Seraph try to be as close to Cypher syntax as possible.
+  Seraph tries to be as close to Cypher syntax as possible.
 
   Nodes are represented by `{variable, schema, properties}` where:
    - variable is a `string`,
@@ -91,7 +91,7 @@ defmodule Seraph.Query do
   Please see the keyword / macro documentation for the aviable operators and functions.
 
   ## About `nil`
-  In Neo4j, `NULL` doesn't exists. This means that you can't have a null property and that **setting a property to null will remove it**.
+  In Neo4j, `NULL` doesn't exist. This means that you can't have a null property and that **setting a property to null will remove it**.
 
   Also, it is preferred to us `is_nil` in where clause instead of using `%{property: nil}`
   """
@@ -1098,7 +1098,7 @@ defmodule Seraph.Query do
           end)
 
         {:merge, merge_data}, changes ->
-          change = change = extract_changes(merge_data.raw_entities, :create_or_merge)
+          change = extract_changes(merge_data.raw_entities, :create_or_merge)
 
           if is_list(change) do
             Enum.reduce(change, changes, fn data, changes ->
@@ -1246,9 +1246,7 @@ defmodule Seraph.Query do
           case id_field in changed_properties do
             true ->
               message =
-                "[MERGE/SET] Identifier field `#{id_field}` must NOT be changed on Node `#{
-                  change.identifier
-                }` for `#{queryable}`"
+                "[MERGE/SET] Identifier field `#{id_field}` must NOT be changed on Node `#{change.identifier}` for `#{queryable}`"
 
               {:error, message}
 
@@ -1261,9 +1259,7 @@ defmodule Seraph.Query do
 
                 _ ->
                   message =
-                    "[MERGE/SET] Merge keys `#{inspect(merge_keys)} should not be changed on Node `#{
-                      change.identifier
-                    }` for `#{queryable}`"
+                    "[MERGE/SET] Merge keys `#{inspect(merge_keys)} should not be changed on Node `#{change.identifier}` for `#{queryable}`"
 
                   {:error, message}
               end
@@ -1282,9 +1278,7 @@ defmodule Seraph.Query do
 
           false ->
             message =
-              "[CREATE / MERGE] Identifier field `#{id_field}` must be set on Node `#{
-                change.identifier
-              }` for `#{change.queryable}`"
+              "[CREATE / MERGE] Identifier field `#{id_field}` must be set on Node `#{change.identifier}` for `#{change.queryable}`"
 
             {:error, message}
         end

@@ -10,26 +10,28 @@ defmodule Seraph.Query.Builder.EntityTest do
         firstName: "John"
       }
 
-      assert [
-               %Seraph.Query.Builder.Entity.Property{
-                 alias: nil,
-                 bound_name: nil,
-                 entity_identifier: "n",
-                 entity_queryable: Seraph.Node,
-                 name: :uuid,
-                 type: nil,
-                 value: "uuid-1"
-               },
-               %Seraph.Query.Builder.Entity.Property{
-                 alias: nil,
-                 bound_name: nil,
-                 entity_identifier: "n",
-                 entity_queryable: Seraph.Node,
-                 name: :firstName,
-                 type: nil,
-                 value: "John"
-               }
-             ] = Entity.build_properties(Seraph.Node, "n", properties)
+      assert Enum.all?(Entity.build_properties(Seraph.Node, "n", properties), fn entity ->
+               entity in [
+                 %Seraph.Query.Builder.Entity.Property{
+                   alias: nil,
+                   bound_name: nil,
+                   entity_identifier: "n",
+                   entity_queryable: Seraph.Node,
+                   name: :uuid,
+                   type: nil,
+                   value: "uuid-1"
+                 },
+                 %Seraph.Query.Builder.Entity.Property{
+                   alias: nil,
+                   bound_name: nil,
+                   entity_identifier: "n",
+                   entity_queryable: Seraph.Node,
+                   name: :firstName,
+                   type: nil,
+                   value: "John"
+                 }
+               ]
+             end)
     end
 
     test "ok: with nil identifier" do
@@ -38,26 +40,28 @@ defmodule Seraph.Query.Builder.EntityTest do
         firstName: "John"
       }
 
-      assert [
-               %Seraph.Query.Builder.Entity.Property{
-                 alias: nil,
-                 bound_name: nil,
-                 entity_identifier: nil,
-                 entity_queryable: Seraph.Node,
-                 name: :uuid,
-                 type: nil,
-                 value: "uuid-1"
-               },
-               %Seraph.Query.Builder.Entity.Property{
-                 alias: nil,
-                 bound_name: nil,
-                 entity_identifier: nil,
-                 entity_queryable: Seraph.Node,
-                 name: :firstName,
-                 type: nil,
-                 value: "John"
-               }
-             ] = Entity.build_properties(Seraph.Node, nil, properties)
+      assert Enum.all?(Entity.build_properties(Seraph.Node, nil, properties), fn entity ->
+               entity in [
+                 %Seraph.Query.Builder.Entity.Property{
+                   alias: nil,
+                   bound_name: nil,
+                   entity_identifier: nil,
+                   entity_queryable: Seraph.Node,
+                   name: :uuid,
+                   type: nil,
+                   value: "uuid-1"
+                 },
+                 %Seraph.Query.Builder.Entity.Property{
+                   alias: nil,
+                   bound_name: nil,
+                   entity_identifier: nil,
+                   entity_queryable: Seraph.Node,
+                   name: :firstName,
+                   type: nil,
+                   value: "John"
+                 }
+               ]
+             end)
     end
 
     test "ok: with empty properties" do

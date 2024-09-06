@@ -242,9 +242,7 @@ defmodule Seraph.IntegrationTest do
         set: [u.viewCount = u.viewCount + 5],
         return: [[view_count: u.viewCount]]
 
-    assert [result] = TestRepo.all(query)
-
-    assert %{"view_count" => 5} = result
+    assert [%{"view_count" => 5}] = TestRepo.all(query)
 
     cql_check = """
     MATCH
@@ -265,7 +263,7 @@ defmodule Seraph.IntegrationTest do
         merge {u, User, %{uuid: ^uuid, firstName: "New User"}},
           return: [u]
 
-      assert [result] = TestRepo.all(query)
+      assert [%{"u" => %User{uuid: ^uuid}}] = TestRepo.all(query)
 
       cql_check = """
       MATCH
@@ -286,7 +284,7 @@ defmodule Seraph.IntegrationTest do
           on_create_set: [u.firstName = "New User"],
           return: [u]
 
-      assert [result] = TestRepo.all(query)
+      assert [%{"u" => %User{uuid: ^uuid}}] = TestRepo.all(query)
 
       cql_check = """
       MATCH
@@ -312,7 +310,7 @@ defmodule Seraph.IntegrationTest do
           on_match_set: [u.firstName = "Updated"],
           return: [u]
 
-      assert [result] = TestRepo.all(query)
+      assert [%{"u" => %User{uuid: ^user_uuid}}] = TestRepo.all(query)
 
       cql_check = """
       MATCH
